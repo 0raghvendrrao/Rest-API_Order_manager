@@ -8,6 +8,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -44,6 +45,13 @@ public class OrderControllerTest {
         verify(assembler,times(2)).toResourceCollection(any());
 
     }
-//    @Test
+    @Test
+    public void testCreateOrder() {
+        //given
+        when(repository.create(any())).thenReturn(new Order());
+        when(assembler.toResource(any())).thenReturn(new OrderResource(new Order()));
+        //when
+        orderController.createOrder(new Order());
 
+    }
 }
